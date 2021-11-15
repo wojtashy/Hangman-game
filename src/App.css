@@ -14,6 +14,10 @@ body {
   height: 100vh;
   width: 100vw;
   background-color: #dddddd;
+  font-family: "Roboto", sans-serif;
+}
+.keyboard {
+  height: 135px;
 }
 .keyboard,
 .missedLetters div {
@@ -79,42 +83,71 @@ body {
   border-radius: 15px;
 }
 .hangman_rope {
-  background: linear-gradient(
-    45deg,
-    #000 7.5%,
-    #735642 7.5%,
-    #735642 42.5%,
-    #000 42.5%,
-    #000 57.5%,
-    #735642 57.5%,
-    #735642 92.5%,
-    #000 92.5%
-  );
-  background-size: 49% 7%;
+  background: #735642;
   border-radius: 0 0 1vw 1vw;
   width: 3%;
-  height: 14%;
+  height: 16%;
   left: 56%;
   top: 20%;
   position: absolute;
 }
 .hangman_head {
-  height: calc(100vw * 0.5 * 0.1);
-  width: calc(100vw * 0.5 * 0.1);
+  height: calc(100vw * 0.45 * 0.1);
+  width: calc(100vw * 0.45 * 0.1);
   border-radius: 50%;
-  border: 1.5vw solid black;
+  border: 3px solid black;
   position: absolute;
-  left: 52.5%;
-  top: 33%;
+  left: 51%;
+  top: 37%;
 }
 .hangman_body {
-  height: calc(100vw * 0.8 * 0.17);
-  width: calc(100vw * 0.8 * 0.12);
-  background-color: black;
+  height: calc(100vw * 0.7 * 0.08);
+  width: calc(100vw * 0.7 * 0.04);
+  border: 3px solid black;
   border-radius: 30%;
   position: absolute;
-  top: 46%;
-  left: 51.5%;
+  top: 51%;
+  left: 53.55%;
+}
+.hangman_hand_1 {
+  height: 15%;
+  width: 3%;
+  border: 3px solid black;
+  position: absolute;
+  top: 50%;
+  left: 46%;
+  transform: rotateZ(30deg);
+  border-radius: 30%;
+}
+.hangman_hand_2 {
+  height: 15%;
+  width: 3%;
+  border: 3px solid black;
+  position: absolute;
+  top: 50%;
+  left: 65%;
+  transform: rotateZ(-30deg);
+  border-radius: 30%;
+}
+.hangman_leg_1 {
+  height: 15%;
+  width: 3%;
+  border: 3px solid black;
+  position: absolute;
+  top: 68%;
+  left: 50%;
+  transform: rotateZ(15deg);
+  border-radius: 30%;
+}
+.hangman_leg_2 {
+  height: 15%;
+  width: 3%;
+  border: 3px solid black;
+  position: absolute;
+  top: 68%;
+  left: 61%;
+  transform: rotateZ(-15deg);
+  border-radius: 30%;
 }
 .visible {
   opacity: 1;
@@ -134,34 +167,66 @@ body {
   border: 2px solid black;
   border-radius: 4px;
   margin-right: 4px;
+  text-align: center;
+  text-transform: capitalize;
+  background-color: rgb(77, 77, 77);
+  color: white;
 }
 
 .missedLetters div p {
   background-color: rgb(223, 89, 89);
-  width: 30px;
-  height: 30px;
+  width: 25px;
+  height: 25px;
   border-radius: 5px;
   border: 2px solid rgb(77, 77, 77);
   margin: 5px 5px 10px 0px;
   text-transform: uppercase;
-  font-size: 1.3rem;
+  font-size: 1.4rem;
+  padding: 3px;
   color: rgb(34, 34, 34);
+  text-align: center;
+}
+.missedLetters {
+  min-height: 110px;
 }
 .newWord {
   min-width: 60px;
   width: 240px;
 }
 .swear {
-  position: absolute;
-  top: 20px;
-  right: 30px;
+  align-self: flex-end;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin: 30px 30px 0 0;
+  padding: 3px;
+  border: 2px solid rgb(77, 77, 77);
+  border-radius: 5px;
+}
+.swear button {
+  margin: 0 0 0 10px;
+  padding: 0;
+  transition-duration: 0.5s;
 }
 button[swear="0"] {
   background-color: green;
 }
 button[swear="1"] {
   background-color: red;
+}
+.gameEnding {
+  position: absolute;
+  z-index: 10;
+  padding: 20px;
+  font-size: 1.2rem;
+  max-width: 70vw;
+  text-align: center;
+  box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.466);
+}
+[value="true"] {
+  background-color: royalblue;
+  color: white;
+}
+[value="false"] {
+  background-color: rgb(223, 89, 89);
 }

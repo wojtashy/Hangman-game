@@ -8,7 +8,10 @@ function Hangman(props){
     "hangman_rope",
     "hangman_head",
     "hangman_body",
-    "hangman_hand_1"
+    "hangman_hand_1",
+    "hangman_hand_2",
+    "hangman_leg_1",
+    "hangman_leg_2",
 
 
   ]
@@ -16,7 +19,7 @@ function Hangman(props){
       <div className="hangman">
         {
 
-          hangmanParts.map((e,i) => props.count > i ? <div className={e}/> : null)
+          hangmanParts.map((e,i) => props.count > i ? <div key={i} className={e}/> : null)
         }
 
         

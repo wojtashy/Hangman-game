@@ -8,7 +8,7 @@ const  App = () => {
   //------------------------------------------START OF HOOKS-------------------------------------
 
   //Hook responsible for letters that are still avaliable
-  const [avaliableLetters, setAvaliableLetters] = useState(['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','r','s','t','u','w','x','y','z']); 
+  const [avaliableLetters, setAvaliableLetters] = useState(['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','r','s','t','u','v','w','x','y','z']); 
  
   //Used letters that does not contain in missing word
   const [wastedLetters, setWastedLetters] = useState([]);
@@ -19,14 +19,13 @@ const  App = () => {
   const[correctLetters, setCorrectLetters] = useState([]);
   //Number of failed tries
   const [failed, updateFailedTries] = useState(0);
-
   //Toggles wheter to allow swearwords in game or not
   const[swear, setSwear] = useState(1);
 
   //------------------------------------------END OF HOOKS--------------------------------------
   
   //Default value of Keyboard
-  const defaultLetters = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','r','s','t','u','w','x','y','z'];
+  const defaultLetters = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','r','s','t','u','v','w','x','y','z'];
   
   //URL of API. "Number" in url stands for number of words thats will be fetched from API. "swear" has value of 1 or 0 depending on user settings(hook - swear)
   const request = new Request(`https://random-word-api.herokuapp.com/word?number=1&swear=${swear}`);
@@ -34,7 +33,7 @@ const  App = () => {
   //Function responsible for updating keyboard according to game state. At the begining it returns 24 letters.
   const updateKeyboard = (newKeyboard) =>{
     setAvaliableLetters(newKeyboard);
-  }
+  } 
   
   const missedLettersUpdate = (missed) =>{
     setWastedLetters(missed);
@@ -48,20 +47,18 @@ const  App = () => {
   //Getting new word at the begining
   window.onload = () => {getNewWord()};
 
-
+ 
   return(
     <>
-      <div className="swear">
+      <GameEnding failed={failed} words={{missing: word,guessed: correctLetters}}></GameEnding>
+     <div className="app">
+     <div className="swear">
           Swearwords
          <button swear={swear} onClick={()=>{
       swear === 1 ? setSwear(0) : setSwear(1)
     }
     }></button>
     </div>
-    
-    
-
-     <div className="app">
       <HiddenWord content={word} guessed={correctLetters}></HiddenWord>
       <Hangman count={failed}></Hangman>
       <div className='keyboard'>
@@ -103,6 +100,8 @@ const  App = () => {
         getNewWord();
         updateKeyboard(defaultLetters);
         setWastedLetters([]);
+        updateFailedTries(0);
+        setCorrectLetters([]);
       }
       }>Roll new Word</button>
       </div>
@@ -110,7 +109,38 @@ const  App = () => {
   )
 }
 
+const GameEnding = (props) =>{
+ const lettersCount = getUniqueCount(props.words.missing)
+  return(
+    <>
+    {lettersCount === props.words.guessed.length ? <GameEndingPrompt win={true} word={props.words.missing}/> : null }
+    {10 === props.failed ? <GameEndingPrompt win={false} word={props.words.missing}/>: null}
+    </>
+  )
+}
 
+const GameEndingPrompt = (props)=>{
+  const winnerMsg = `Your missing word was: ${props.word}`;
+  const loserMsg = `Your missing word was: ${props.word}`;
+ return(
+    <div className={`gameEnding`} value={props.win}>
+      {props.win ? "Congrats! You win."  : "You lose :+(. " }
+      <br></br>
+      {props.win ?  winnerMsg :  loserMsg}
+    </div>
+ )
+}
+function getUniqueCount(word){
+word = word.split('');
+let uniqueLetters =[];
+ word.forEach(element => {
+  uniqueLetters.includes(element) ?  console.log('') : uniqueLetters.push(element) 
+ }); 
+return(
+  uniqueLetters.length
+)
+
+}
 function MissedLetters(props){
   return(
     <div>
@@ -121,7 +151,6 @@ function MissedLetters(props){
 }
 
 function HiddenWord(props){
-  
   return(
     <div className="hidden">
       {props.content.split('').map((e,i) =>   <p key={i.toString()}>{ props.guessed.includes(e) ? e : null}</p>)
