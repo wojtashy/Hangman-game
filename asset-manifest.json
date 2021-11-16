@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/Hangman-game.io/static/css/main.c40ec7ca.chunk.css",
+    "main.js": "/Hangman-game.io/static/js/main.ed7a44b6.chunk.js",
+    "main.js.map": "/Hangman-game.io/static/js/main.ed7a44b6.chunk.js.map",
+    "runtime-main.js": "/Hangman-game.io/static/js/runtime-main.47470b5f.js",
+    "runtime-main.js.map": "/Hangman-game.io/static/js/runtime-main.47470b5f.js.map",
+    "static/js/2.581b0371.chunk.js": "/Hangman-game.io/static/js/2.581b0371.chunk.js",
+    "static/js/2.581b0371.chunk.js.map": "/Hangman-game.io/static/js/2.581b0371.chunk.js.map",
+    "index.html": "/Hangman-game.io/index.html",
+    "static/css/main.c40ec7ca.chunk.css.map": "/Hangman-game.io/static/css/main.c40ec7ca.chunk.css.map",
+    "static/js/2.581b0371.chunk.js.LICENSE.txt": "/Hangman-game.io/static/js/2.581b0371.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.47470b5f.js",
+    "static/js/2.581b0371.chunk.js",
+    "static/css/main.c40ec7ca.chunk.css",
+    "static/js/main.ed7a44b6.chunk.js"
+  ]
+}
