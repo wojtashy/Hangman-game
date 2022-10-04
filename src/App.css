@@ -193,27 +193,6 @@ body {
   min-width: 60px;
   width: 240px;
 }
-.swear {
-  align-self: flex-end;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin: 30px 30px 0 0;
-  padding: 3px;
-  border: 2px solid rgb(77, 77, 77);
-  border-radius: 5px;
-}
-.swear button {
-  margin: 0 0 0 10px;
-  padding: 0;
-  transition-duration: 0.5s;
-}
-button[swear="0"] {
-  background-color: green;
-}
-button[swear="1"] {
-  background-color: red;
-}
 .gameEnding {
   position: absolute;
   z-index: 10;

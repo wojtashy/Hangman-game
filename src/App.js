@@ -1,7 +1,7 @@
 import './App.css';
 import {React, useState} from 'react';
-
 import Hangman from './Hangman';
+
 const  App = () => {
 
   //ALL HOOKS USEED IN APP
@@ -19,16 +19,14 @@ const  App = () => {
   const[correctLetters, setCorrectLetters] = useState([]);
   //Number of failed tries
   const [failed, updateFailedTries] = useState(0);
-  //Toggles wheter to allow swearwords in game or not
-  const[swear, setSwear] = useState(1);
-
+  
   //------------------------------------------END OF HOOKS--------------------------------------
   
   //Default value of Keyboard
   const defaultLetters = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','r','s','t','u','v','w','x','y','z'];
   
-  //URL of API. "Number" in url stands for number of words thats will be fetched from API. "swear" has value of 1 or 0 depending on user settings(hook - swear)
-  const request = new Request(`https://random-word-api.herokuapp.com/word?number=1&swear=${swear}`);
+  //URL of API. "Number" in url stands for number of words thats will be fetched from API. 
+  const request = new Request(`https://random-word-api.herokuapp.com/word?number=1`);
 
   //Function responsible for updating keyboard according to game state. At the begining it returns 24 letters.
   const updateKeyboard = (newKeyboard) =>{
@@ -47,18 +45,18 @@ const  App = () => {
   //Getting new word at the begining
   window.onload = () => {getNewWord()};
 
+  const newGame = () =>{
+        getNewWord();
+        updateKeyboard(defaultLetters);
+        setWastedLetters([]);
+        updateFailedTries(0);
+        setCorrectLetters([]);
+  }
  
   return(
     <>
       <GameEnding failed={failed} words={{missing: word,guessed: correctLetters}}></GameEnding>
      <div className="app">
-     <div className="swear">
-          Swearwords
-         <button swear={swear} onClick={()=>{
-      swear === 1 ? setSwear(0) : setSwear(1)
-    }
-    }></button>
-    </div>
       <HiddenWord content={word} guessed={correctLetters}></HiddenWord>
       <Hangman count={failed}></Hangman>
       <div className='keyboard'>
@@ -96,13 +94,7 @@ const  App = () => {
         </div>
       <button 
       className="newWord"
-      onClick={ ()=>{
-        getNewWord();
-        updateKeyboard(defaultLetters);
-        setWastedLetters([]);
-        updateFailedTries(0);
-        setCorrectLetters([]);
-      }
+      onClick={ ()=>{newGame()}
       }>Roll new Word</button>
       </div>
     </>
